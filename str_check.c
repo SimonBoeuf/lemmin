@@ -1,5 +1,16 @@
 #include "includes/lemmin.h"
 
+int		is_ant_number(char *str)
+{
+	if (*str)
+	{
+		while (ft_isdigit(*str))
+		str++;
+		return (!*str);
+	}
+	return (0);
+}
+
 int		is_comment(char *str)
 {
 	return (strstart("#", str));
@@ -21,7 +32,6 @@ int		is_room(char *str)
 		str++;
 		while (ft_isdigit(*str))
 			str++;
-		ft_putendl(str);
 		if (*str)
 			return (0);
 		return (1);

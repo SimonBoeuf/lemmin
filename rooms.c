@@ -1,21 +1,22 @@
 #include "includes/lemmin.h"
 
-t_rooms		*init_rooms(void)
+t_anthill		*init_anthill(void)
 {
-	t_rooms	*rooms;
+	t_anthill	*anthill;
 
-	rooms = (t_rooms*)malloc(sizeof(t_rooms));
-	rooms->start = NULL;
-	rooms->end = NULL;
-	rooms->rooms = NULL;
-	return (rooms);
+	anthill = (t_anthill*)malloc(sizeof(t_anthill));
+	anthill->start = NULL;
+	anthill->end = NULL;
+	anthill->rooms = NULL;
+	anthill->ants = 0;
+	return (anthill);
 }
 
-t_rooms		*get_rooms(void)
+t_anthill		*get_anthill(void)
 {
-	static t_rooms	*rooms = NULL;
+	static t_anthill	*anthill = NULL;
 
-	if (rooms == NULL)
-		rooms = init_rooms();
-	return (rooms);
+	if (anthill == NULL)
+		anthill = init_anthill();
+	return (anthill);
 }

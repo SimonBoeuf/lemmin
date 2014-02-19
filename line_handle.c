@@ -2,7 +2,9 @@
 
 int		handle_line(char *line)
 {
-	if (is_comment(line))
+	if (is_ant_number(line))
+		handle_ants(line);
+	else if (is_comment(line))
 		handle_comment(line);
 	else if (is_room(line))
 		handle_room(line, COMMON);
@@ -12,6 +14,13 @@ int		handle_line(char *line)
 		return (0);
 	ft_putendl(line);
 	return (1);
+}
+
+void	handle_ants(char *s)
+{
+	t_anthill	*r;
+	r = get_anthill();
+	r->ants = get_ant_number(s);
 }
 
 void	handle_comment(char *s)
@@ -50,8 +59,8 @@ void	handle_pipe(char *s)
 	t_room	*r1;
 	t_room	*r2;
 
-	name1 = get_room_name(&s);
-	name2 = get_room_name(&s);
+	name1 = get_room_name_pipe(&s);
+	name2 = get_room_name_pipe(&s);
 	r1 = find_room(name1);
 	r2 = find_room(name2);
 	if (r1 == NULL || r2 == NULL)

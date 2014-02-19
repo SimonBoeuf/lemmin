@@ -10,6 +10,7 @@ t_room	*new_room(char *name, int x, int y, t_rtype type)
 	r->y = y;
 	r->type = type;
 	r->dist = -1;
+	r->busy = 0;
 	r->pipes = NULL;
 	r->next = NULL;
 	return (r);
@@ -17,15 +18,15 @@ t_room	*new_room(char *name, int x, int y, t_rtype type)
 
 void	add_room(char *name, int x, int y, t_rtype type)
 {
-	t_rooms	*rooms;
+	t_anthill	*anthill;
 	t_room	*new;
 	t_room	*tmp;
 
-	rooms = get_rooms();
+	anthill = get_anthill();
 	new = new_room(name, x, y, type);
-	tmp = rooms->rooms;
+	tmp = anthill->rooms;
 	if (tmp == NULL)
-		rooms->rooms = new;
+		anthill->rooms = new;
 	else
 	{
 		while (tmp->next != NULL)
@@ -33,16 +34,16 @@ void	add_room(char *name, int x, int y, t_rtype type)
 		tmp->next = new;
 	}
 	if (type == START)
-		rooms->start = new;
+		anthill->start = new;
 	if (type == END)
-		rooms->end = new;
+		anthill->end = new;
 }
 
 t_room	*find_room(char *name)
 {
 	t_room	*tmp;
 
-	tmp = get_rooms()->rooms;
+	tmp = get_anthill()->rooms;
 	while (tmp != NULL)
 	{
 		if (!ft_strcmp(tmp->name, name))
