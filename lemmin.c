@@ -2,15 +2,31 @@
 
 void	lemmin(void)
 {
+	get_map();
+	find_paths();
+	resolve();
+}
+
+void	get_map(void)
+{
 	int		r;
 	char	*line;
 	int		map;
-	t_anthill	*ro;
 
 	map = 1;
 	while ((r = get_next_line(0, &line)) > 0 && map)
 		map = handle_line(line);
 	if (r == -1)
 		strerror(errno);
-	ro = get_anthill();
+	
+}
+
+void	find_paths(void)
+{
+
+}
+
+void	resolve(void)
+{
+
 }

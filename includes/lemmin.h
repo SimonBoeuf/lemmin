@@ -48,6 +48,9 @@ typedef struct		s_anthill
 ** Core
 */
 void	lemmin(void);
+void	get_map(void);
+void	find_paths(void);
+void	resolve(void);
 int		get_next_line(int const fd, char **line);
 
 /*
