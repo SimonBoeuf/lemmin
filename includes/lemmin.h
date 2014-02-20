@@ -35,12 +35,27 @@ typedef struct		s_pipe
 	struct s_pipe	*next;
 }					t_pipe;
 
+typedef struct		s_path
+{
+	t_room			*room;
+	int				dist;
+	struct s_path	*next;
+}					t_path;
+
+typedef struct		s_paths
+{
+	t_path			*path;
+	int				length;
+	struct s_paths	*next;
+}					t_paths;
+
 typedef struct		s_anthill
 {
 	t_room			*start;
 	t_room			*end;
 	t_room			*rooms;
 	t_pipe			*pipes;
+	t_paths			*paths;
 	int				ants;
 }					t_anthill;
 
@@ -51,6 +66,10 @@ void	lemmin(void);
 void	get_map(void);
 void	find_paths(void);
 void	resolve(void);
+
+/*
+** Get next line
+*/
 int		get_next_line(int const fd, char **line);
 
 /*
@@ -98,5 +117,19 @@ int		get_ant_number(char *line);
 char	*get_room_name_pipe(char **line);
 char	*get_room_name(char **line);
 int		get_coord(char **line);
+
+/*
+** Paths
+*/
+t_paths	*new_paths(t_path *p);
+void	add_paths(t_path *p);
+int		enough_paths(void);
+
+/*
+** Path
+*/
+t_path	*new_path(t_room *r, int dist);
+void	add_path(t_room *r, int dist);
+void	dijkstra(void);
 
 #endif

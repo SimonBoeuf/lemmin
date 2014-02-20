@@ -23,7 +23,10 @@ void	get_map(void)
 
 void	find_paths(void)
 {
-
+	while (!enough_paths())
+	{
+		dijkstra();
+	}
 }
 
 void	resolve(void)

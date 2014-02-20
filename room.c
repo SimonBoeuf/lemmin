@@ -9,7 +9,6 @@ t_room	*new_room(char *name, int x, int y, t_rtype type)
 	r->x = x;
 	r->y = y;
 	r->type = type;
-	r->dist = -1;
 	r->busy = 0;
 	r->pipes = NULL;
 	r->next = NULL;

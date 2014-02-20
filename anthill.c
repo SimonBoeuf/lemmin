@@ -5,10 +5,11 @@ t_anthill		*init_anthill(void)
 	t_anthill	*anthill;
 
 	anthill = (t_anthill*)malloc(sizeof(t_anthill));
+	anthill->ants = 0;
 	anthill->start = NULL;
 	anthill->end = NULL;
 	anthill->rooms = NULL;
-	anthill->ants = 0;
+	anthill->paths = NULL;
 	return (anthill);
 }
 

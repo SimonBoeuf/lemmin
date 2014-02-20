@@ -8,11 +8,13 @@ SRCS		= 	main.c				\
 				lemmin.c			\
 				ft_get_next_line.c	\
 				line_handle.c		\
-				rooms.c				\
+				anthill.c			\
 				room.c				\
 				map_to_room.c		\
 				pipe.c				\
 				str_check.c			\
+				paths.c				\
+				path.c				\
 
 OBJS		= $(SRCS:.c=.o)
 
