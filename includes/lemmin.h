@@ -124,6 +124,7 @@ int		get_coord(char **line);
 t_paths	*new_paths(t_path *p);
 void	add_paths(t_path *p);
 int		enough_paths(void);
+int		no_paths_left(void);
 
 /*
 ** Path

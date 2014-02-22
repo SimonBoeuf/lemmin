@@ -32,5 +32,4 @@ void	add_path(t_room *r, int dist)
 
 void	dijkstra(void)
 {
-
 }

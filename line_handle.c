@@ -30,7 +30,8 @@ void	handle_comment(char *s)
 	char		*line;
 
 	type = (!ft_strcmp(s, "##start")) ? START : COMMON;
-	type = (!ft_strcmp(s, "##end")) ? END : COMMON;
+	if (type != START)
+		type = (!ft_strcmp(s, "##end")) ? END : COMMON;
 	if (type != COMMON)
 	{
 		if ((r = get_next_line(0, &line)) > 0)
