@@ -38,7 +38,6 @@ typedef struct		s_pipe
 typedef struct		s_path
 {
 	t_room			*room;
-	int				dist;
 	struct s_path	*next;
 }					t_path;
 
@@ -130,7 +129,9 @@ int		no_paths_left(void);
 ** Path
 */
 t_path	*new_path(t_room *r, int dist);
-void	add_path(t_room *r, int dist);
+void	add_path(t_path **p, t_room *r, int dist);
 void	dijkstra(void);
+void	affect_dist(t_room *r, int dist);
+t_path	*get_path(void);
 
 #endif

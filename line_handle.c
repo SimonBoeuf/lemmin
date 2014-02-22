@@ -12,13 +12,14 @@ int		handle_line(char *line)
 		handle_pipe(line);
 	else
 		return (0);
-	ft_putendl(line);
 	return (1);
 }
 
 void	handle_ants(char *s)
 {
 	t_anthill	*r;
+
+	ft_putendl(s);
 	r = get_anthill();
 	r->ants = get_ant_number(s);
 }
@@ -29,6 +30,7 @@ void	handle_comment(char *s)
 	t_rtype		type;
 	char		*line;
 
+	ft_putendl(s);
 	type = (!ft_strcmp(s, "##start")) ? START : COMMON;
 	if (type != START)
 		type = (!ft_strcmp(s, "##end")) ? END : COMMON;
@@ -47,6 +49,7 @@ void	handle_room(char *s, t_rtype type)
 	int		x;
 	int		y;
 
+	ft_putendl(s);
 	name = get_room_name(&s);
 	x = get_coord(&s);
 	y = get_coord(&s);
@@ -60,6 +63,7 @@ void	handle_pipe(char *s)
 	t_room	*r1;
 	t_room	*r2;
 
+	ft_putendl(s);
 	name1 = get_room_name_pipe(&s);
 	name2 = get_room_name_pipe(&s);
 	r1 = find_room(name1);

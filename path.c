@@ -6,30 +6,113 @@ t_path	*new_path(t_room *r, int dist)
 
 	p = (t_path*)malloc(sizeof(t_path));
 	p->room = r;
-	p->dist = dist;
+	p->room->dist = dist;
 	p->next = NULL;
 	return (p);
 }
 
-void	add_path(t_room *r, int dist)
+void	add_path(t_path **start, t_room *r, int dist)
 {
-	t_anthill	*anthill;
 	t_path		*new;
-	t_path		*tmp;
 
-	anthill = get_anthill();
 	new = new_path(r, dist);
-	if (anthill->paths == NULL)
-		anthill->paths = new_paths(new);
+	if (*start == NULL)
+	{
+		*start = new;
+	}
 	else
 	{
-		tmp = anthill->paths->path;
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = new;
+		new->next = (*start);
+		*start = new;
+	}
+}
+
+void	reset_dists(t_path *p)
+{
+	t_room	*tmp;
+
+	tmp = get_anthill()->rooms;
+	while (tmp != NULL)
+	{
+		if (tmp->dist > -1)
+			tmp->dist = -1;
+		tmp = tmp->next;
+	}
+	ft_putendl("New path");
+	while (p != NULL)
+	{
+		p->room->dist = -2;
+		p = p->next;
 	}
 }
 
 void	dijkstra(void)
 {
+	t_path	*p;
+	get_anthill()->start->dist = 0;
+	affect_dist(get_anthill()->start, 0);
+	p = get_path();
+	add_paths(p);
+	reset_dists(p);
+	while (p != NULL)
+	{
+		ft_putendl(p->room->name);
+		p = p->next;
+	}
+}
+
+void	affect_dist(t_room *r, int dist)
+{
+	t_pipe	*pipes;
+
+	dist++;
+	pipes = get_anthill()->pipes;
+	while (pipes != NULL)
+	{
+		if (pipes->r1 == r && (pipes->r2->dist > dist || pipes->r2->dist == -1))
+		{
+			pipes->r2->dist = dist;
+			if (pipes->r2->type != END)
+				affect_dist(pipes->r2, dist);
+		}
+		if (pipes->r2 == r && (pipes->r1->dist > dist || pipes->r1->dist == -1))
+		{
+			pipes->r1->dist = dist;
+			if (pipes->r1->type != END)
+				affect_dist(pipes->r1, dist);
+		}
+		pipes = pipes->next;
+	}
+}
+
+t_path	*get_path(void)
+{
+	t_room	*r;
+	t_path	*p;
+	t_pipe	*pipes;
+
+	r = get_anthill()->end;
+	p = NULL;
+	add_path(&p, r, r->dist);
+	while (r->dist > 0)
+	{
+		pipes = get_anthill()->pipes;
+		while (pipes != NULL)
+		{
+			if (pipes->r1 == r && pipes->r2->dist == r->dist - 1)
+			{
+				r = pipes->r2;
+				add_path(&p, r, r->dist);
+				break ;
+			}
+			else if (pipes->r2 == r && pipes->r1->dist == r->dist - 1)
+			{
+				r = pipes->r1;
+				add_path(&p, r, r->dist);
+				break ;
+			}
+			pipes = pipes->next;
+		}
+	}
+	return (p);
 }

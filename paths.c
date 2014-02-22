@@ -34,17 +34,14 @@ int		enough_paths(void)
 {
 	t_paths	*paths;
 	int		nb_paths;
-	int		total_length;
 
 	paths = get_anthill()->paths;
-	//if (paths == NULL)
-	//	return (0);
+	if (paths == NULL)
+		return (0);
 	nb_paths = 0;
-	total_length = 0;
 	while (paths != NULL)
 	{
 		nb_paths++;
-		total_length += paths->length;
 		paths = paths->next;
 	}
 	if (nb_paths == get_anthill()->ants || no_paths_left())
@@ -59,10 +56,10 @@ int		no_paths_left(void)
 	pipes = get_anthill()->pipes;
 	while (pipes != NULL)
 	{
-		if ((pipes->r1->type == START && pipes->r2->dist == -2) ||
-				(pipes->r2->type == START && pipes->r1->dist == -2))
-			return (1);
+		if ((pipes->r1->type == START && pipes->r2->dist != -2) ||
+				(pipes->r2->type == START && pipes->r1->dist != -2))
+			return (0);
 		pipes = pipes->next;
 	}
-	return (0);
+	return (1);
 }
