@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   room.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sboeuf <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/02/23 21:43:45 by sboeuf            #+#    #+#             */
+/*   Updated: 2014/02/23 21:47:39 by sboeuf           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/lemmin.h"
 
 t_room	*new_room(char *name, int x, int y, t_rtype type)
@@ -19,8 +31,8 @@ t_room	*new_room(char *name, int x, int y, t_rtype type)
 void	add_room(char *name, int x, int y, t_rtype type)
 {
 	t_anthill	*anthill;
-	t_room	*new;
-	t_room	*tmp;
+	t_room		*new;
+	t_room		*tmp;
 
 	anthill = get_anthill();
 	new = new_room(name, x, y, type);

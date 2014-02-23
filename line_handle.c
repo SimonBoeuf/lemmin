@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   line_handle.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sboeuf <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/02/23 21:43:03 by sboeuf            #+#    #+#             */
+/*   Updated: 2014/02/23 23:11:08 by sboeuf           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/lemmin.h"
 
 int		handle_line(char *line)
 {
-	if (is_ant_number(line))
-		handle_ants(line);
-	else if (is_comment(line))
+	if (is_comment(line))
 		handle_comment(line);
+	else if (is_ant_number(line))
+		handle_ants(line);
 	else if (is_room(line))
 		handle_room(line, COMMON);
 	else if (is_pipe(line))
@@ -50,6 +62,12 @@ void	handle_room(char *s, t_rtype type)
 	int		x;
 	int		y;
 
+	while (!is_room(s))
+	{
+		ft_putendl(s);
+		if (get_next_line(0, &s) <= 0)
+			exit (-1);
+	}
 	ft_putendl(s);
 	name = get_room_name(&s);
 	x = get_coord(&s);

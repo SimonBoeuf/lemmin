@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ant.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sboeuf <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/02/23 21:42:27 by sboeuf            #+#    #+#             */
+/*   Updated: 2014/02/23 21:54:18 by sboeuf           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/lemmin.h"
 
 t_ant	*new_ant(char *name)
@@ -44,15 +56,6 @@ void	move_ant(t_path *p)
 	}
 	p->next->ant = p->ant;
 	p->ant = NULL;
-}
-
-void	move_ants(t_paths *p)
-{
-	t_path	*path;
-
-	path = p->path;
-	if (path != NULL)
-		move_ant(path);
 }
 
 int		get_ants_left(void)

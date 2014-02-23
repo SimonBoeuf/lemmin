@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_to_room.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sboeuf <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/02/23 21:43:10 by sboeuf            #+#    #+#             */
+/*   Updated: 2014/02/23 21:43:24 by sboeuf           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/lemmin.h"
 
 char	*get_room_name_pipe(char **line)
@@ -35,7 +47,7 @@ int		get_coord(char **line)
 	int		rslt;
 
 	len = 0;
-	while (line[0][len] && ft_isdigit(line[0][len]))
+	while ((line[0][len] && ft_isdigit(line[0][len])) || line[0][len] == '-')
 		len++;
 	coord = ft_strnew(len);
 	coord = ft_strncpy(coord, *line, len);

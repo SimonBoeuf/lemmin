@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   anthill.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sboeuf <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/02/23 21:42:31 by sboeuf            #+#    #+#             */
+/*   Updated: 2014/02/23 21:56:51 by sboeuf           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/lemmin.h"
 
 t_anthill		*init_anthill(void)
@@ -43,3 +55,13 @@ int				finished(void)
 	}
 	return (1);
 }
+
+void			move_ants(t_paths *p)
+{
+	t_path	*path;
+
+	path = p->path;
+	if (path != NULL)
+		move_ant(path);
+}
+

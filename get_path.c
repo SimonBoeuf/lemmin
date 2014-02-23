@@ -1,43 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe.c                                             :+:      :+:    :+:   */
+/*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sboeuf <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/02/23 21:43:43 by sboeuf            #+#    #+#             */
-/*   Updated: 2014/02/23 21:43:45 by sboeuf           ###   ########.fr       */
+/*   Created: 2014/02/23 21:53:15 by sboeuf            #+#    #+#             */
+/*   Updated: 2014/02/23 21:53:26 by sboeuf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/lemmin.h"
 
-t_pipe	*new_pipe(t_room *r1, t_room *r2)
+t_path	*get_path(void)
 {
-	t_pipe	*p;
+	t_room	*r;
+	t_path	*p;
+	t_pipe	*pipes;
 
-	p = (t_pipe*)malloc(sizeof(t_pipe));
-	p->r1 = r1;
-	p->r2 = r2;
-	p->next = NULL;
-	return (p);
-}
-
-void	add_pipe(t_room *r1, t_room *r2)
-{
-	t_anthill	*anthill;
-	t_pipe		*pipes;
-	t_pipe		*new;
-
-	anthill = get_anthill();
-	pipes = anthill->pipes;
-	new = new_pipe(r1, r2);
-	if (pipes == NULL)
-		anthill->pipes = new;
-	else
+	r = get_anthill()->end;
+	p = NULL;
+	add_path(&p, r, r->dist);
+	while (r->dist > 0)
 	{
-		while (pipes->next != NULL)
+		pipes = get_anthill()->pipes;
+		while (pipes != NULL)
+		{
+			if ((pipes->r1 == r && pipes->r2->dist == r->dist -1)
+					|| (pipes->r2 == r && pipes->r1->dist == r->dist -1))
+			{
+				r = pipes->r1 == r ? pipes->r2 : pipes->r1;
+				add_path(&p, r, r->dist);
+			}
 			pipes = pipes->next;
-		pipes->next = new;
+		}
 	}
+	return (p->room->type == START ? p : NULL);
 }
