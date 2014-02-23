@@ -16,7 +16,8 @@ void	get_map(void)
 
 	map = 1;
 	while ((r = get_next_line(0, &line)) > 0 && map)
-		map = handle_line(line);
+		if (!(map = handle_line(line)))
+			break ;
 	if (r == -1)
 		strerror(errno);
 	
@@ -33,28 +34,28 @@ void	resolve(void)
 	t_paths	*paths;
 	int		i;
 	int		path_number;
-	int		ants_left;
 
 	paths = get_anthill()->paths;
-	if (paths == NULL)
+	if (paths == NULL || paths->path == NULL)
+	{
+		ft_putendl("No solutions");
 		exit (0);
+	}
 	path_number = get_paths_number();
 	i = 0;
 	while (i < path_number)
 	{
-		ants_left = get_ants_left();
 		move_ants(paths);
-		if (i == 0 || ants_left > paths->length)
-			paths->path->ant = get_next_ant();	
+		if (i == 0 || get_anthill()->ants_left > paths->length)
+		{
+			paths->path->ant = get_next_ant();
+			if (get_next_ant() != NULL)
+				get_anthill()->ants_left--;
+		}
 		i++;
 		paths = paths->next;
 	}
-	display();
+	ft_putendl("");
 	if (!finished())
 		resolve();
-}
-
-void	display(void)
-{
-
 }

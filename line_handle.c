@@ -22,6 +22,7 @@ void	handle_ants(char *s)
 	ft_putendl(s);
 	r = get_anthill();
 	r->ants = ft_atoi(s);
+	r->ants_left = ft_atoi(s);
 }
 
 void	handle_comment(char *s)

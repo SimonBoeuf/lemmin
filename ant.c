@@ -30,8 +30,18 @@ void	add_ant(char *name)
 
 void	move_ant(t_path *p)
 {
-	if (p->next != NULL && p->next->room->type != END)
-		move_ant(p->next);
+	if (p->next != NULL)
+	{
+		if (p->ant != NULL)
+		{
+			ft_putstr(p->ant->name);
+			ft_putstr("->");
+			ft_putstr(p->next->room->name);
+			ft_putstr(" ");
+		}
+		if (p->next->room->type != END)
+			move_ant(p->next);
+	}
 	p->next->ant = p->ant;
 	p->ant = NULL;
 }
@@ -73,10 +83,9 @@ t_ant	*get_next_ant(void)
 	int		ants_left;
 	t_ant	*tmp;
 
-	ants_left = get_ants_left();
+	ants_left = get_anthill()->ants_left;
 	if (ants_left == 0)
 		return (NULL);
-	ft_putnbr(ants_left);
 	i = get_anthill()->ants - ants_left;
 	tmp = get_anthill()->ant;
 	while (i > 0)
@@ -84,6 +93,5 @@ t_ant	*get_next_ant(void)
 		tmp = tmp->next;
 		i--;
 	}
-	ft_putendl(tmp->name);
 	return (tmp);
 }

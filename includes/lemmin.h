@@ -65,6 +65,7 @@ typedef struct		s_anthill
 	t_paths			*paths;
 	t_ant			*ant;
 	int				ants;
+	int				ants_left;
 }					t_anthill;
 
 /*

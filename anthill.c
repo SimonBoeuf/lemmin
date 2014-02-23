@@ -6,6 +6,7 @@ t_anthill		*init_anthill(void)
 
 	anthill = (t_anthill*)malloc(sizeof(t_anthill));
 	anthill->ants = 0;
+	anthill->ants_left = 0;
 	anthill->start = NULL;
 	anthill->end = NULL;
 	anthill->rooms = NULL;
