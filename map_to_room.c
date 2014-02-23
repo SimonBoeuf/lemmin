@@ -1,19 +1,5 @@
 #include "includes/lemmin.h"
 
-int		get_ant_number(char *line)
-{
-	int	rslt;
-	int	i;
-
-	rslt = 0;
-	i = 0;
-	while (ft_isdigit(line[i]))
-		i++;
-	if (!line[i])
-		rslt = ft_atoi(line);
-	return (rslt);
-}
-
 char	*get_room_name_pipe(char **line)
 {
 	char	*name;
@@ -58,3 +44,18 @@ int		get_coord(char **line)
 	return (rslt);
 }
 
+void	add_ants(void)
+{
+	char	*name;
+	int		i;
+
+	i = 1;
+	while (i <= get_anthill()->ants)
+	{
+		name = ft_strnew(10);
+		name = ft_strcat(name, "L");
+		name = ft_strcat(name, ft_itoa(i));
+		add_ant(name);
+		i++;
+	}
+}

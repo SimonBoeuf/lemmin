@@ -10,6 +10,7 @@ t_anthill		*init_anthill(void)
 	anthill->end = NULL;
 	anthill->rooms = NULL;
 	anthill->paths = NULL;
+	anthill->ant = NULL;
 	return (anthill);
 }
 
@@ -20,4 +21,24 @@ t_anthill		*get_anthill(void)
 	if (anthill == NULL)
 		anthill = init_anthill();
 	return (anthill);
+}
+
+int				finished(void)
+{
+	t_paths	*paths;
+	t_path	*path;
+
+	paths = get_anthill()->paths;
+	while (paths != NULL)
+	{
+		path = paths->path;
+		while (path != NULL)
+		{
+			if (path->ant != NULL)
+				return (0);
+			path = path->next;
+		}
+		paths = paths->next;
+	}
+	return (1);
 }

@@ -15,6 +15,7 @@ SRCS		= 	main.c				\
 				str_check.c			\
 				paths.c				\
 				path.c				\
+				ant.c				\
 
 OBJS		= $(SRCS:.c=.o)
 

@@ -63,3 +63,18 @@ int		no_paths_left(void)
 	}
 	return (1);
 }
+
+int		get_paths_number(void)
+{
+	int		i;
+	t_paths	*tmp;
+
+	tmp = get_anthill()->paths;
+	i = 0;
+	while (tmp != NULL)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
+}
